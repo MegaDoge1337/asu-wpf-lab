@@ -1,0 +1,40 @@
+﻿<Window x:Class="Willberries.UI.DeliveryMethods.DeliveryMethodsList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Willberries.UI.DeliveryMethods"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Willberries" Height="450" Width="800"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}" WindowState="Maximized">
+    <materialDesign:Card Padding="32">
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <Button Name="OpenAddMethodForm" Click="OpenAddMethodForm_Click" Content="+ Добавить метод доставки" Style="{StaticResource MaterialDesignFlatButton}"></Button>
+                <Button Name="RefreshMethodsList" Click="RefreshMethodsList_Click"  Content="↺ Обновить список" Style="{StaticResource MaterialDesignFlatButton}"></Button>
+                <Button Name="GoBack" Click="GoBack_Click" Content="Вернуться на панель управления   ❯" Style="{StaticResource MaterialDesignFlatButton}"></Button>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Top">
+                <DataGrid Name="DeliveryMethodsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ИД" Binding="{Binding Id}" />
+                        <DataGridTextColumn Header="Метод доставки" Binding="{Binding MethodTitle}" />
+                        <DataGridTextColumn Header="Стоимость доставки" Binding="{Binding Amount}" />
+                    </DataGrid.Columns>
+                    <DataGrid.ItemContainerStyle>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.ItemContainerStyle>
+                </DataGrid>
+            </StackPanel>
+        </DockPanel>
+    </materialDesign:Card>
+</Window>

@@ -1,0 +1,143 @@
+﻿<Window x:Class="Willberries.UI.MainDashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Willberries.UI"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Willberries" Height="450" Width="800"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}" WindowState="Maximized">
+    <materialDesign:Card Padding="32">
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Left">
+                <Button Name="ProductsDashboard" Click="ProductsDashboard_Click" Style="{StaticResource MaterialDesignFlatButton}">Товары</Button>
+                <Button Name="CustomersDashboard" Click="CustomersDashboard_Click" Style="{StaticResource MaterialDesignFlatButton}">Заказчики</Button>
+                <Button Name="OrdersDashboard" Click="OrdersDashboard_Click" Style="{StaticResource MaterialDesignFlatButton}">Заказы</Button>
+                <Button Name="DeliveryMethodsDashboard" Style="{StaticResource MaterialDesignFlatButton}" Click="DeliveryMethodsDashboard_Click">Способы доставки</Button>
+                <Button Name="UsersDashboard" Click="UsersDashboard_Click" Style="{StaticResource MaterialDesignFlatButton}">Пользователи</Button>
+                <Button Name="GoBack" Click="GoBack_Click" Style="{StaticResource MaterialDesignFlatButton}">Выйти из панели</Button>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right" Margin="5 0 0 0">
+                <Border BorderThickness="3" CornerRadius="1" BorderBrush="GhostWhite">
+                    <Border BorderThickness="3" CornerRadius="3" BorderBrush="LightGray">
+                        <StackPanel Margin="10">
+                            <TextBlock Name="CountOfOrdersByCustomerDisplay" Style="{StaticResource MaterialDesignHeadline6TextBlock}">Количество заказов у заказчика: -</TextBlock>
+                            <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox Grid.Column="1"  materialDesign:HintAssist.Hint="Заказчик" Name="SelectedCustomer1" Style="{StaticResource MaterialDesignComboBox}" Margin="5 10 5 5" Foreground="Purple" BorderBrush="Purple"></ComboBox>
+                                <Button Grid.Column="2" Name="GetOrdersCountByCustomer" Click="GetOrdersCountByCustomer_Click" Style="{StaticResource MaterialDesignFlatButton}" Foreground="Purple" Grid.Row="2" Content="Расчитать" Margin="5"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Border>
+                <Border BorderThickness="3" CornerRadius="1" BorderBrush="GhostWhite">
+                    <Border BorderThickness="3" CornerRadius="3" BorderBrush="LightGray">
+                        <StackPanel Margin="10">
+                            <TextBlock Name="CountOfOrderedProductsDisplay" Margin="0 0 0 5" Style="{StaticResource MaterialDesignHeadline6TextBlock}">Количество заказаных товаров у заказчика: -</TextBlock>
+                            <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox Grid.Column="1"  materialDesign:HintAssist.Hint="Заказчик" Name="SelectedCustomer2" Style="{StaticResource MaterialDesignComboBox}" Margin="5 10 5 5" Foreground="Purple" BorderBrush="Purple"></ComboBox>
+                                <Button Grid.Column="2" Name="GetOrderedProductsCountByCustomer" Click="GetOrderedProductsCountByCustomer_Click" Style="{StaticResource MaterialDesignFlatButton}" Foreground="Purple" Grid.Row="2" Content="Расчитать" Margin="5"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Border>
+                <Border BorderThickness="3" CornerRadius="1" BorderBrush="GhostWhite">
+                    <Border BorderThickness="3" CornerRadius="3" BorderBrush="LightGray">
+                        <StackPanel Margin="10">
+                            <TextBlock Name="CountOfOrdersByDateRangeDisplay" Style="{StaticResource MaterialDesignHeadline6TextBlock}">Количество заказов в периоде: -</TextBlock>
+                            <Grid Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <DatePicker Grid.Column="1" materialDesign:HintAssist.Hint="С" Name="StartDate" Style="{StaticResource MaterialDesignDatePicker}" Foreground="Purple" BorderBrush="Purple" SelectedDateFormat="Short" Margin="5 10 5 10"/>
+                                <DatePicker Grid.Column="2" materialDesign:HintAssist.Hint="По" Name="EndDate" Style="{StaticResource MaterialDesignDatePicker}" Foreground="Purple" BorderBrush="Purple" SelectedDateFormat="Short" Margin="5 10 5 10"/>
+                                <Button Grid.Column="5" Name="GetOrdersCountByDateRange" Click="GetOrdersCountByDateRange_Click" Style="{StaticResource MaterialDesignFlatButton}" Foreground="Purple" Grid.Row="2" Content="Расчитать" Margin="5"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Border>
+                <Border BorderThickness="3" CornerRadius="1" BorderBrush="GhostWhite">
+                    <Border BorderThickness="3" CornerRadius="3" BorderBrush="LightGray">
+                        <StackPanel Margin="10">
+                            <TextBlock Name="ProductAmountDisplay" Margin="0 0 0 5" Style="{StaticResource MaterialDesignHeadline6TextBlock}">Цена товара с учётом доставки: -</TextBlock>
+                            <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox Grid.Column="1"  materialDesign:HintAssist.Hint="Товар" Name="SelectedProduct" Style="{StaticResource MaterialDesignComboBox}" Margin="5 10 5 5" Foreground="Purple" BorderBrush="Purple"></ComboBox>
+                                <Button Grid.Column="2" Name="GetProductAmount" Click="GetProductAmount_Click" Style="{StaticResource MaterialDesignFlatButton}" Foreground="Purple" Grid.Row="2" Content="Расчитать" Margin="5"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Border>
+                <Border BorderThickness="3" CornerRadius="1" BorderBrush="GhostWhite">
+                    <Border BorderThickness="3" CornerRadius="3" BorderBrush="LightGray">
+                        <StackPanel Margin="10">
+                            <TextBlock Name="DeliveryMethodDisplay" Margin="0 0 0 5" Style="{StaticResource MaterialDesignHeadline6TextBlock}">Кем доставляется заказ: -</TextBlock>
+                            <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox Grid.Column="1"  materialDesign:HintAssist.Hint="Номер заказа" Name="SelectedOrderNumber" Style="{StaticResource MaterialDesignComboBox}" Margin="5 10 5 5" Foreground="Purple" BorderBrush="Purple"></ComboBox>
+                                <Button Grid.Column="2" Name="GetOrderDeliveryMethod" Click="GetOrderDeliveryMethod_Click" Style="{StaticResource MaterialDesignFlatButton}" Foreground="Purple" Grid.Row="2" Content="Расчитать" Margin="5"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Border>
+                <Border BorderThickness="3" CornerRadius="1" BorderBrush="GhostWhite">
+                    <Border BorderThickness="3" CornerRadius="3" BorderBrush="LightGray">
+                        <StackPanel Margin="10">
+                            <TextBlock Name="BillDisplay" Margin="0 0 0 5" Style="{StaticResource MaterialDesignHeadline6TextBlock}">Получить чек заказа</TextBlock>
+                            <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox Grid.Column="1"  materialDesign:HintAssist.Hint="Номер заказа" Name="SelectedOrderNumberForBill" Style="{StaticResource MaterialDesignComboBox}" Margin="5 10 5 5" Foreground="Purple" BorderBrush="Purple"></ComboBox>
+                                <Button Grid.Column="2" Name="GenerateOrderBill" Click="GenerateOrderBill_Click" Style="{StaticResource MaterialDesignFlatButton}" Foreground="Purple" Grid.Row="2" Content="Сформировать" Margin="5"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Border>
+                <Border BorderThickness="3" CornerRadius="1" BorderBrush="GhostWhite">
+                    <Border BorderThickness="3" CornerRadius="3" BorderBrush="LightGray">
+                        <StackPanel Margin="10">
+                            <TextBlock Name="JsonDisplay" Margin="0 0 0 5" Style="{StaticResource MaterialDesignHeadline6TextBlock}">Импорт/экспорт данных</TextBlock>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Grid.Column="2" Name="Import" Click="Import_Click" Style="{StaticResource MaterialDesignFlatButton}" Foreground="Purple" Grid.Row="2" Content="Импортировать" Margin="5"/>
+                                <Button Grid.Column="2" Name="Export" Click="Export_Click" Style="{StaticResource MaterialDesignFlatButton}" Foreground="Purple" Grid.Row="2" Content="Экспортировать" Margin="5"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Border>
+            </StackPanel>
+        </DockPanel>
+    </materialDesign:Card>
+</Window>
